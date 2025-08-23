@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yash Diggikar — Research & Portfolio</title>
+  <meta name="description" content="Personal research website for Yash Diggikar: AI for Earth system forecasting, neural operators, transformers, SciML." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220; /* deep slate/navy */
+      --card: #0f172a; /* slate-900 */
+      --muted: #94a3b8; /* slate-400 */
+      --text: #e2e8f0; /* slate-200 */
+      --accent: #60a5fa; /* blue-400 */
+      --ring: #1e293b; /* slate-800 */
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text); background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,0.2), transparent 60%),
+                             radial-gradient(900px 500px at 110% 10%, rgba(34,197,94,0.15), transparent 60%),
+                             linear-gradient(180deg, #0a0f1d 0%, #0b1220 100%);
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { position: sticky; top: 0; backdrop-filter: blur(8px); background: rgba(11,18,32,0.6); border-bottom: 1px solid var(--ring); z-index: 50; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    .row { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    nav a { margin-left: 18px; font-weight: 500; color: var(--text); opacity: .9; }
+    .hero { padding: 72px 0 40px; }
+    .hero h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.05; margin: 0 0 10px; }
+    .hero p.lead { font-size: clamp(16px, 2.5vw, 20px); color: var(--muted); margin: 0 0 24px; }
+    .tag { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--ring); border-radius:999px; color:#cbd5e1; font-size:14px; margin-right:8px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    section { padding: 28px 0; }
+    .card { background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(15,23,42,0.7)); border: 1px solid var(--ring); border-radius: 18px; padding: 22px; }
+    h2 { font-size: 22px; margin: 0 0 10px; }
+    p { line-height: 1.6; color: #cbd5e1; margin: 0 0 10px; }
+    ul { margin: 10px 0 0 20px; color: #cbd5e1; }
+    footer { border-top: 1px solid var(--ring); padding: 24px 0; color: var(--muted); }
+    .cta { display:inline-flex; align-items:center; gap:10px; background:#111827; color:var(--text); border:1px solid var(--ring); padding:10px 14px; border-radius: 12px; font-weight:600; }
+    .links a { margin-right: 12px; }
+    @media (min-width: 800px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap row">
+      <div><a href="#" style="font-weight:800; letter-spacing:.3px; color:var(--text)">Yash Diggikar</a></div>
+      <nav class="links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#thesis">Thesis</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>AI for Earth System Forecasting</h1>
+      <p class="lead">Master’s student (CS, UMBC). Deep learning, physics‑informed neural networks, transformers, neural operators, and foundation models for scientific applications.</p>
+      <div class="tags">
+        <span class="tag">Scientific ML (SciML)</span>
+        <span class="tag">Neural Operators</span>
+        <span class="tag">Transformers</span>
+        <span class="tag">Foundation Models</span>
+      </div>
+    </section>
+
+    <section id="about" class="grid">
+      <div class="card" style="grid-column: 1 / -1;">
+        <h2>About</h2>
+        <p>I am a Master’s student in Computer Science at the University of Maryland, Baltimore County (UMBC), with a bachelor’s degree in Computer Science focused on Artificial Intelligence and Machine Learning. I am interested in machine learning, deep learning, physics‑informed neural networks, transformers, and foundation models for scientific applications. My research explores AI‑driven weather and climate forecasting, using machine learning and deep learning methods for long‑range prediction.</p>
+      </div>
+    </section>
+
+    <section id="research" class="grid">
+      <div class="card">
+        <h2>Research Interests</h2>
+        <p>My research is focused on advancing AI‑driven weather and climate forecasting through the development and evaluation of physics‑informed neural operators and transformer‑based architectures. I design experiments that integrate data assimilation frameworks into the inference stage of AI‑based weather models and conduct Observing System Simulation Experiments (OSSEs) to assess how new satellite observing systems and assimilation strategies influence performance, and to evaluate how assimilating satellite data with AI models can improve long‑range prediction and demonstrate their potential in operational forecasting.</p>
+        <p>More broadly, my interests lie in the application of artificial intelligence, machine learning, and deep learning across scientific and engineering domains. With a strong foundation in neural network architectures—including physics‑informed models, neural operators, and transformers—I am particularly drawn to the emerging field of Scientific Machine Learning (SciML). In this context, I have gained experience working with large‑scale AI models for Earth system forecasting, which has allowed me to study their training dynamics, scalability, and potential to serve as foundation models that bridge scientific research with real‑world impact in areas such as energy, healthcare, and environmental applications.</p>
+      </div>
+    </section>
+
+    <section id="thesis" class="grid">
+      <div class="card">
+        <h2>Thesis Goal</h2>
+        <p>As part of my Master’s thesis, I am training FourCastNet v2 from scratch on reanalysis datasets to investigate how physics‑informed neural operators learn atmospheric dynamics, evaluate their ability to generalize across variables and timescales, and enhance the skill of long‑range weather and climate prediction. Beyond analyzing learning dynamics, my work seeks to advance AI‑based Earth system forecasting by developing a controllable and extensible model that can serve as a scalable foundation for integrating data assimilation and designing OSSE‑based experiments. This research contributes to the creation of next‑generation foundation models that integrate numerical weather prediction (NWP) and AI, with the dual aim of advancing scientific understanding of the Earth system and enabling practical applications in operational forecasting, energy, environmental monitoring, and other high‑impact industries.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="grid">
+      <div class="card">
+        <h2>Contact</h2>
+        <p class="links">
+          <a class="cta" href="mailto:YOUR_EMAIL">Email</a>
+          <a class="cta" href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="cta" href="https://github.com/YOUR_GITHUB" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="cta" href="#" target="_blank" rel="noreferrer">CV (PDF)</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="y"></span> Yash Diggikar • Built with vanilla HTML/CSS • Deployed on GitHub Pages</div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
