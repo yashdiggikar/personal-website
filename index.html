@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yash Diggikar — ML Researcher, Weather &amp; Earth Systems</title>
+<meta name="description" content="Yash Diggikar is a machine learning researcher at UMBC and NASA Goddard working on AI foundation models — GraphCast, Aurora, Prithvi WxC — for weather, dust, and Earth system forecasting.">
+<meta name="author" content="Yash Diggikar">
+<link rel="canonical" href="https://yashdiggikar.github.io/personal-website/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yash Diggikar — ML Researcher, Weather &amp; Earth Systems">
+<meta property="og:description" content="PhD student at UMBC and Research Intern at NASA Goddard, building AI foundation models for weather, climate, and Earth system science.">
+<meta property="og:url" content="https://yashdiggikar.github.io/personal-website/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yash Diggikar — ML Researcher, Weather &amp; Earth Systems">
+<meta name="twitter:description" content="PhD student at UMBC and Research Intern at NASA Goddard, building AI foundation models for weather, climate, and Earth system science.">
+<style>
+  :root {
+    --paper: #EEF1EC;
+    --paper-alt: #E3E7E0;
+    --ink: #12181F;
+    --ink-soft: #4B5560;
+    --line: rgba(18,24,31,0.13);
+    --dust: #BD6E23;
+    --isobar: #1B7480;
+    --card: #F6F8F4;
+
+    --abyss: #0A0F1A;
+    --abyss-2: #0F1826;
+    --abyss-3: #141F30;
+    --on-abyss: #F1F3F0;
+    --on-abyss-soft: #C6CDD2;
+    --dust-bright: #E39A4C;
+    --isobar-bright: #4FC0CB;
+
+    --serif: Charter, "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --mono: "SF Mono", ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0E141B;
+      --paper-alt: #131A22;
+      --ink: #E9ECE6;
+      --ink-soft: #9AA4AC;
+      --line: rgba(233,236,230,0.13);
+      --dust: #D68A3C;
+      --isobar: #4FB3BE;
+      --card: #131A22;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0E141B;
+    --paper-alt: #131A22;
+    --ink: #E9ECE6;
+    --ink-soft: #9AA4AC;
+    --line: rgba(233,236,230,0.13);
+    --dust: #D68A3C;
+    --isobar: #4FB3BE;
+    --card: #131A22;
+  }
+  :root[data-theme="light"] {
+    --paper: #EEF1EC;
+    --paper-alt: #E3E7E0;
+    --ink: #12181F;
+    --ink-soft: #4B5560;
+    --line: rgba(18,24,31,0.13);
+    --dust: #BD6E23;
+    --isobar: #1B7480;
+    --card: #F6F8F4;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--isobar); color: var(--on-abyss); }
+
+  a { color: inherit; }
+  :focus-visible {
+    outline: 2px solid var(--isobar);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- HERO (fixed dark instrument panel) ---------- */
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    background: linear-gradient(180deg, var(--abyss) 0%, var(--abyss-2) 62%, var(--abyss-3) 100%);
+    color: var(--on-abyss);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .hero canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 22px 28px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.09em;
+    color: var(--on-abyss-soft);
+  }
+  .hero-nav .coord { font-variant-numeric: tabular-nums; }
+
+  .hero-main {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px 28px 90px;
+    max-width: 720px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--isobar-bright);
+    margin: 0 0 18px;
+  }
+  .hero-main .name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 26px;
+    text-wrap: balance;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .intro {
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--on-abyss);
+    max-width: 58ch;
+    margin: 4px auto 0;
+    text-wrap: pretty;
+  }
+  .intro b { font-weight: 700; color: var(--on-abyss); }
+  .affiliations {
+    margin-top: 40px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(241,243,240,0.22);
+    width: 100%;
+    max-width: 640px;
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--on-abyss);
+    margin: 0 0 16px;
+  }
+  .affiliations .contact-row { margin-bottom: 0; }
+  .affiliations .chip {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+  .chip {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    padding: 8px 14px;
+    border: 1px solid rgba(241,243,240,0.22);
+    border-radius: 3px;
+    color: var(--on-abyss);
+    text-decoration: none;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  a.chip:hover { border-color: var(--isobar-bright); background: rgba(79,192,203,0.08); }
+  .chip.static { color: var(--on-abyss); font-weight: 600; border-color: rgba(241,243,240,0.5); border-style: dashed; }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--on-abyss-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .scroll-cue .line { width: 1px; height: 26px; background: linear-gradient(var(--isobar-bright), transparent); animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 88px 0; }
+  section + section { border-top: 1px solid var(--line); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 44px;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dust);
+    letter-spacing: 0.06em;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.7rem;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .role-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .role {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--line);
+    border-radius: 7px;
+    padding: 28px 30px;
+  }
+  .role.current { border-left-color: var(--isobar); }
+  .role-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .role-date {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 5px 13px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .role.current .role-date { color: var(--isobar); border-color: color-mix(in srgb, var(--isobar) 35%, transparent); background: color-mix(in srgb, var(--isobar) 9%, transparent); }
+  .role h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.18rem;
+    margin: 0 0 3px;
+  }
+  .role .org {
+    font-size: 0.92rem;
+    color: var(--isobar);
+    margin: 0 0 14px;
+  }
+  .role .advisor {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .role ul {
+    margin: 12px 0 0;
+    padding-left: 18px;
+  }
+  .role li {
+    margin-bottom: 10px;
+    font-size: 0.97rem;
+    color: var(--ink);
+  }
+  .role li:last-child { margin-bottom: 0; }
+  .role li::marker { color: var(--dust); }
+  .role li b { font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .role { padding: 24px 22px; }
+    .role-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  .card p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0;
+    flex: 1;
+  }
+  .taglist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--isobar) 12%, transparent);
+    color: var(--isobar);
+  }
+  .card-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dust);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--dust);
+    align-self: flex-start;
+  }
+
+  .card.featured {
+    margin-bottom: 18px;
+    padding: 30px 32px;
+    background: linear-gradient(160deg, var(--card), var(--paper-alt));
+    border-color: color-mix(in srgb, var(--dust) 35%, var(--line));
+  }
+  .card.featured h3 { font-size: 1.32rem; }
+  .card.featured p:not(.kicker):not(.skill-label) { font-size: 0.96rem; color: var(--ink); }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin: 0;
+  }
+  .collab { margin-top: 6px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .collab .pill { font-size: 0.8rem; }
+
+  /* ---------- TALKS ---------- */
+  .talk-list { display: flex; flex-direction: column; }
+  .talk { padding: 26px 0; border-top: 1px solid var(--line); }
+  .talk:first-child { border-top: none; padding-top: 0; }
+  .talk-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .talk-top h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin: 0;
+    max-width: 56ch;
+  }
+  .status {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 20px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .status-presented { color: var(--isobar); border-color: var(--isobar); background: color-mix(in srgb, var(--isobar) 10%, transparent); }
+  .status-submitted { color: var(--dust); border-color: var(--dust); background: color-mix(in srgb, var(--dust) 10%, transparent); }
+  .status-talk { color: var(--ink-soft); border-color: var(--line); }
+  .talk-meta {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin: 7px 0 10px;
+  }
+  .talk-desc { font-size: 0.94rem; color: var(--ink); margin: 0; max-width: 70ch; }
+
+  /* ---------- SKILLS ---------- */
+  .skill-group { margin-bottom: 26px; }
+  .skill-group:last-child { margin-bottom: 0; }
+  .skill-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    font-size: 0.86rem;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    color: var(--ink);
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-timeline {
+    display: flex;
+    flex-direction: column;
+  }
+  .edu-item {
+    display: flex;
+    gap: 26px;
+    align-items: flex-start;
+  }
+  .edu-item + .edu-item { margin-top: 8px; }
+  .edu-node {
+    position: relative;
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    z-index: 1;
+  }
+  .edu-item.current .edu-node {
+    border-color: var(--isobar);
+    color: var(--isobar);
+    background: color-mix(in srgb, var(--isobar) 10%, var(--card));
+  }
+  .edu-item:not(:last-child) .edu-node::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 44px;
+    background: linear-gradient(var(--line), var(--line));
+  }
+  .edu-body {
+    flex: 1;
+    padding: 10px 0 44px;
+    border-bottom: 1px solid var(--line);
+  }
+  .edu-item:last-child .edu-body { border-bottom: none; padding-bottom: 4px; }
+  .edu-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .edu-body h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .edu-degree { font-size: 0.98rem; color: var(--isobar); margin: 0 0 4px; }
+  .edu-loc {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  @media (max-width: 560px) {
+    .edu-node { flex-basis: 46px; width: 46px; height: 46px; font-size: 9.5px; }
+    .edu-item:not(:last-child) .edu-node::after { height: 30px; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--abyss);
+    color: var(--on-abyss);
+    padding: 64px 0 40px;
+  }
+  footer .wrap { display: flex; flex-direction: column; gap: 28px; }
+  footer h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 2.1rem;
+    margin: 0;
+    text-wrap: balance;
+  }
+  footer .contact-row .chip { border-color: rgba(241,243,240,0.22); }
+  .foot-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--on-abyss-soft);
+    padding-top: 28px;
+    border-top: 1px solid rgba(241,243,240,0.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue .line { animation: none; opacity: .6; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="flow"></canvas>
+  <nav class="hero-nav">
+    <span class="coord">39.29°N&nbsp;76.61°W · BALTIMORE, MD</span>
+  </nav>
+  <div class="hero-main">
+    <p class="eyebrow">PhD Student — ML Researcher · Weather, Climate &amp; Earth Systems</p>
+    <h1 class="name">Yash Diggikar</h1>
+    <div class="contact-row">
+      <a class="chip" href="mailto:yashd1@umbc.edu">yashd1@umbc.edu</a>
+      <a class="chip" href="tel:+16824349725">+1 682&nbsp;434&nbsp;9725</a>
+      <a class="chip" href="https://www.linkedin.com/in/yashdiggikar/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="chip" href="https://github.com/yashdiggikar" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="intro">Machine Learning Researcher specializing in AI for weather, climate, and Earth system science. Experienced in developing and evaluating spatiotemporal deep learning and scientific machine learning systems, including foundation models, transformers, graph neural networks, and neural operators, using large-scale geospatial and atmospheric datasets and HPC-based ML workflows. Research interests include Earth system foundation models, data-driven forecasting, AI-data assimilation, and AI-enabled scientific modeling.</p>
+    <div class="affiliations">
+      <p class="hero-label">Affiliations</p>
+      <div class="contact-row">
+        <span class="chip static">University of Maryland, Baltimore County</span>
+        <span class="chip static">Science Systems and Applications, Inc.</span>
+        <span class="chip static">NASA Goddard Space Flight Center</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<main>
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Education</h2>
+      </div>
+
+      <div class="edu-timeline">
+        <div class="edu-item current">
+          <div class="edu-node">PhD</div>
+          <div class="edu-body">
+            <div class="edu-top">
+              <h3>University of Maryland, Baltimore County</h3>
+              <span class="role-date">08/2024 – Present</span>
+            </div>
+            <p class="edu-degree">PhD in Computer Science</p>
+            <p class="edu-loc">Baltimore, MD</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-node">B.Tech</div>
+          <div class="edu-body">
+            <div class="edu-top">
+              <h3>Keshav Memorial Institute of Technology</h3>
+              <span class="role-date">08/2020 – 05/2024</span>
+            </div>
+            <p class="edu-degree">Bachelor of Technology in Computer Science (AI/ML)</p>
+            <p class="edu-loc">Hyderabad, India</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Experience</h2>
+      </div>
+
+      <div class="role-list">
+        <div class="role current">
+          <div class="role-head">
+            <div>
+              <h3>Research Intern</h3>
+              <p class="org">Science Systems and Applications, Inc. (SSAI) · NASA Goddard Space Flight Center</p>
+            </div>
+            <span class="role-date">06/2026 – Present</span>
+          </div>
+          <ul>
+            <li>Contributing to <b>TerraHydro</b>, a NASA AI-based Earth system digital twin for hydrological prediction across CONUS — soil moisture, evapotranspiration, snow water equivalent, runoff, and streamflow.</li>
+            <li>Built an end-to-end MERRA-2 data pipeline to preprocess NASA GES&nbsp;DISC reanalysis data and generate daily Prithvi&nbsp;WxC encoder embeddings.</li>
+            <li>Integrated Prithvi&nbsp;WxC atmospheric foundation-model embeddings into TerraHydro's LSTM-based hydrology framework, and is designing workflows to evaluate their impact alongside ERA5, MODIS, and static land-surface features.</li>
+            <li>Scaling the workflow toward a 12-year production run on NASA HPC, with plans to extend coverage from CONUS to global domains.</li>
+          </ul>
+        </div>
+
+        <div class="role current">
+          <div class="role-head">
+            <div>
+              <h3>Research Assistant</h3>
+              <p class="org">Center for Accelerated Real-Time Analytics (CARTA), UMBC</p>
+              <p class="advisor">Advisor: Dr. Milton Halem</p>
+            </div>
+            <span class="role-date">08/2024 – Present</span>
+          </div>
+          <ul>
+            <li>Develops transformer-based architectures, neural operators, and physics-informed neural networks (PINNs) for AI-driven weather and climate forecasting.</li>
+            <li><b>Prithvi-Dust</b> — an autoregressive global dust-forecasting framework adapting the NASA–IBM Prithvi&nbsp;WxC foundation model on MERRA-2 meteorological and size-resolved aerosol data, with researchers at NASA Ames, MSFC, and GMAO.</li>
+            <li>Models MERRA-2–observation residuals and applies attention- and embedding-based attribution to identify drivers of regional and vertical dust bias, informing GEOS aerosol-model improvements and future observing priorities.</li>
+            <li><b>MS Thesis</b> — designed an AI-based Observing System Simulation Experiment (OSSE) framework across four foundation models (GraphCast, FourCastNet&nbsp;v2, Aurora, Prithvi&nbsp;WxC) using ERA5, MERRA-2, and CAMS data; extended autoregressive inference to 60-day global forecasts and injected synthetic/reanalysis observations post spin-up to quantify observing-system value for temperature sounders, wind profilers/lidars, and mass-field constraints. Presented at the <b>AMS Annual Meeting</b>, January 2026.</li>
+            <li>Built a model-accountability and physical-response analysis pipeline (RMSE, NRMSE, ACC, mean bias, cross-variable coupling, synergy metrics, spatial bias-reduction maps, latitude / land-ocean / cloud-regime stratification, vertical propagation diagnostics) to evaluate how AI weather models assimilate and propagate observational constraints, including Western U.S. high-wind and fire-weather case studies.</li>
+            <li>Fine-tuning <b>Aurora</b> (1.3B parameters) on CERRA regional reanalysis at 5.5&nbsp;km resolution over Europe with mixed-precision, distributed data-parallel training for high-resolution regional forecasting.</li>
+            <li>Extending post-training workflows to air-pollution modeling — designing CAMS observation-insertion workflows for CO, PM2.5, O₃, and NO₂ with NASA Ames.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-head">
+            <div>
+              <h3>Teaching Assistant — Operating Systems (CMSC 421)</h3>
+              <p class="org">UMBC</p>
+            </div>
+            <span class="role-date">01/2025 – 05/2025</span>
+          </div>
+          <ul>
+            <li>Supported students on threading, file systems, and networking projects at the systems-programming level; helped with VM setup and Linux debugging.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="role-head">
+            <div>
+              <h3>Research Development Intern</h3>
+              <p class="org">Tata Consultancy Services, Hyderabad, India</p>
+            </div>
+            <span class="role-date">07/2023 – 06/2024</span>
+          </div>
+          <ul>
+            <li>Improved semiconductor wafer yield through multi-objective optimization (pymoo) and ML (scikit-learn, TensorFlow); applied PCA and clustering for defect detection and predictive maintenance.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Research &amp; Projects</h2>
+      </div>
+      <div class="card featured">
+        <p class="kicker">Featured — Ongoing</p>
+        <h3>Prithvi-Dust</h3>
+        <p>Adapting the NASA–IBM Prithvi&nbsp;WxC foundation model for global dust forecasting. Retains the pretrained backbone while adding dust-specific input/output mappings for five size-resolved tracers — surface and column dust mass, aerosol optical properties, emissions, sedimentation, and wet/dry deposition — trained on post-2000 MERRA-2 residuals. Uses attention- and embedding-based attribution to rank meteorological and process controls (winds, PBL height, precipitation, particle size, deposition) on regional and vertical dust bias, and benchmarks against Aurora on events including the 13 June 2022 Iraq sandstorm.</p>
+        <div class="taglist"><span class="tag">Prithvi WxC</span><span class="tag">MERRA-2</span><span class="tag">Aurora benchmark</span><span class="tag">AGU 2026</span></div>
+        <div class="collab">
+          <p class="skill-label">In collaboration with</p>
+          <div class="pills">
+            <span class="pill">Dr. Milton Halem — UMBC (Advisor)</span>
+            <span class="pill">Aishwarya Raman — NASA Ames / BAERI</span>
+            <span class="pill">Allison Collow — NASA GMAO</span>
+            <span class="pill">Sujit Roy — NASA IMPACT, UAH</span>
+            <span class="pill">Jonathan Gee — NASA Ames</span>
+          </div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>AI-Based OSSE Framework</h3>
+          <p>Observing System Simulation Experiments across four global foundation models — GraphCast (DeepMind/ECMWF), FourCastNet&nbsp;v2 (NVIDIA), Aurora (Microsoft), and Prithvi&nbsp;WxC (NASA/IBM) — quantifying the value of temperature, wind, and mass-field observations on 60-day forecasts.</p>
+          <div class="taglist"><span class="tag">GraphCast</span><span class="tag">FourCastNet v2</span><span class="tag">Aurora</span><span class="tag">Prithvi WxC</span></div>
+        </div>
+        <div class="card">
+          <h3>AI Surgical Navigator</h3>
+          <p>Surgical instrument and procedure detection app — YOLO for detection, ResNet for segmentation — with a React front-end and a MongoDB/Node.js backend.</p>
+          <div class="taglist"><span class="tag">YOLO</span><span class="tag">ResNet</span><span class="tag">React</span><span class="tag">Node.js</span></div>
+          <span class="card-link">Source code</span>
+        </div>
+        <div class="card">
+          <h3>Bird Species Classifier</h3>
+          <p>InceptionV3 classifier reaching 95% accuracy, deployed as a Flutter mobile app for real-time bird species prediction.</p>
+          <div class="taglist"><span class="tag">InceptionV3</span><span class="tag">Flutter</span></div>
+        </div>
+        <div class="card">
+          <h3>Skin Cancer Detection</h3>
+          <p>Custom CNN trained on dermoscopic images; validated that data augmentation — rotations, flips, brightness shifts — improved model robustness.</p>
+          <div class="taglist"><span class="tag">CNN</span><span class="tag">OpenCV</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="talks">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Talks &amp; Presentations</h2>
+      </div>
+      <div class="talk-list">
+        <article class="talk">
+          <div class="talk-top">
+            <h3>AI-Based OSSE Framework for Evaluating Physical Consistency in AI Weather Models</h3>
+            <span class="status status-presented">Presented</span>
+          </div>
+          <p class="talk-meta">AMS Annual Meeting — January 2026</p>
+          <p class="talk-desc">MS thesis work — an Observing System Simulation Experiment framework spanning GraphCast, FourCastNet&nbsp;v2, Aurora, and Prithvi&nbsp;WxC, quantifying how AI weather models assimilate and propagate observational constraints.</p>
+        </article>
+
+        <article class="talk">
+          <div class="talk-top">
+            <h3>Prithvi-Dust: Adapting a Weather and Climate Foundation Model for Global Dust Forecasting</h3>
+            <span class="status status-submitted">Abstract submitted</span>
+          </div>
+          <p class="talk-meta">AGU Fall Meeting 2026 — Session A009, Advances in Global Aerosol Modeling: Representation, Assimilation, and Prediction</p>
+          <p class="talk-desc">Diggikar, Halem, Raman, Collow, Roy &amp; Gee. Benchmarks Prithvi-Dust against Aurora on the 13 June 2022 Iraq sandstorm and other events, using error, bias, spatial correlation, Threat Score, and Fractions Skill Score.</p>
+        </article>
+
+        <article class="talk">
+          <div class="talk-top">
+            <h3>A Retrospective on the Sensitivity of AI Emulators to Saharan Dust</h3>
+            <span class="status status-talk">Talk</span>
+          </div>
+          <p class="talk-meta">Randall Symposium — talk to be delivered by Dr. Milton Halem</p>
+          <p class="talk-desc">Halem, Diggikar &amp; Raman. Revisits the Randall–Carlson–Mintz (1984) finding that Saharan dust heating narrows and intensifies the tropical Atlantic rain belt, adapting Prithvi&nbsp;WxC to test whether an AI emulator reproduces that GCM sensitivity.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Skills</h2>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-label">AI / ML techniques</p>
+        <div class="pills">
+          <span class="pill">Deep Learning</span><span class="pill">Foundation Models</span><span class="pill">Transformer Architectures</span><span class="pill">Neural Operators</span><span class="pill">PINNs</span><span class="pill">Graph Neural Networks</span><span class="pill">CNNs</span><span class="pill">RNNs / LSTMs</span><span class="pill">Diffusion Models</span><span class="pill">Reinforcement Learning</span><span class="pill">Transfer Learning</span><span class="pill">Fine-Tuning</span><span class="pill">Ensemble Methods</span><span class="pill">Anomaly Detection</span><span class="pill">Multi-Objective Optimization</span><span class="pill">Representation Learning</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-label">Data &amp; geospatial</p>
+        <div class="pills">
+          <span class="pill">xarray</span><span class="pill">NumPy</span><span class="pill">pandas</span><span class="pill">netCDF4</span><span class="pill">GRIB</span><span class="pill">Zarr</span><span class="pill">matplotlib</span><span class="pill">cartopy</span><span class="pill">Data Assimilation</span><span class="pill">Reanalysis Datasets</span><span class="pill">Geospatial Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-label">MLOps &amp; infrastructure</p>
+        <div class="pills">
+          <span class="pill">Docker</span><span class="pill">Git</span><span class="pill">Linux</span><span class="pill">HPC (A100 / H100)</span><span class="pill">Distributed Training (DDP)</span><span class="pill">Mixed-Precision Training</span><span class="pill">WandB / MLflow</span><span class="pill">SLURM</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-label">Data science</p>
+        <div class="pills">
+          <span class="pill">EDA</span><span class="pill">Feature Engineering</span><span class="pill">Data Cleaning</span><span class="pill">Statistical Analysis</span><span class="pill">A/B Testing</span><span class="pill">Data Visualization</span><span class="pill">Time Series Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-label">Programming &amp; foundations</p>
+        <div class="pills">
+          <span class="pill">Python</span><span class="pill">C</span><span class="pill">C++</span><span class="pill">SQL</span><span class="pill">Data Structures &amp; Algorithms</span><span class="pill">Computer Architecture</span><span class="pill">Complexity Analysis</span><span class="pill">Dynamic Programming</span><span class="pill">Graph Algorithms</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Let's talk weather, models, or both.</h2>
+    <div class="contact-row">
+      <a class="chip" href="mailto:yashd1@umbc.edu">yashd1@umbc.edu</a>
+      <a class="chip" href="tel:+16824349725">+1 682&nbsp;434&nbsp;9725</a>
+      <a class="chip" href="https://www.linkedin.com/in/yashdiggikar/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="chip" href="https://github.com/yashdiggikar" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-bottom">
+      <span>YASH DIGGIKAR — BALTIMORE, MD</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var canvas = document.getElementById('flow');
+  var ctx = canvas.getContext('2d');
+  var hero = document.querySelector('.hero');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, DPR;
+  var particles = [];
+  var N = 260;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = hero.offsetWidth;
+    H = hero.offsetHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.fillStyle = '#0A0F1A';
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function angle(x, y, t) {
+    return (
+      Math.sin(x * 0.0021 + t * 0.00018) * 1.6 +
+      Math.cos(y * 0.0026 - t * 0.00013) * 1.4 +
+      Math.sin((x + y) * 0.0013 + t * 0.00007)
+    );
+  }
+
+  function makeParticle() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      life: 60 + Math.random() * 160,
+      hue: Math.random() < 0.72 ? 'isobar' : 'dust'
+    };
+  }
+
+  function initParticles() {
+    particles = [];
+    for (var i = 0; i < N; i++) particles.push(makeParticle());
+  }
+
+  function step(t) {
+    ctx.fillStyle = 'rgba(10,15,26,0.055)';
+    ctx.fillRect(0, 0, W, H);
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      var a = angle(p.x, p.y, t);
+      var vx = Math.cos(a) * 1.15;
+      var vy = Math.sin(a) * 1.15 + 0.12;
+      var px = p.x, py = p.y;
+      p.x += vx;
+      p.y += vy;
+      p.life -= 1;
+
+      var col = p.hue === 'isobar' ? '79,192,203' : '227,154,76';
+      ctx.strokeStyle = 'rgba(' + col + ',0.34)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+
+      if (p.life <= 0 || p.x < -20 || p.x > W + 20 || p.y < -20 || p.y > H + 20) {
+        particles[i] = makeParticle();
+      }
+    }
+    if (!reduced) requestAnimationFrame(step);
+  }
+
+  function drawStatic() {
+    ctx.strokeStyle = 'rgba(79,192,203,0.28)';
+    ctx.lineWidth = 1;
+    for (var i = 0; i < 70; i++) {
+      var x = Math.random() * W, y = Math.random() * H;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      for (var s = 0; s < 40; s++) {
+        var a = angle(x, y, 0);
+        x += Math.cos(a) * 4;
+        y += Math.sin(a) * 4;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = i % 4 === 0 ? 'rgba(227,154,76,0.22)' : 'rgba(79,192,203,0.22)';
+      ctx.stroke();
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', function () {
+    resize();
+    if (reduced) drawStatic(); else initParticles();
+  });
+
+  if (reduced) {
+    drawStatic();
+  } else {
+    initParticles();
+    requestAnimationFrame(step);
+  }
+})();
+</script>
+</body>
+</html>
