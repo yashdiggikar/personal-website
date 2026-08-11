@@ -24,6 +24,7 @@
     --dust: #C2600F;
     --isobar: #1B7480;
     --card: #F6F8F4;
+    --dot: rgba(18,24,31,0.065);
 
     --abyss: #0A0F1A;
     --abyss-2: #0F1826;
@@ -47,7 +48,8 @@
       --line: rgba(233,236,230,0.13);
       --dust: #E8923A;
       --isobar: #4FB3BE;
-      --card: #131A22;
+      --card: #151B20;
+      --dot: rgba(233,236,230,0.065);
     }
   }
   :root[data-theme="dark"] {
@@ -58,7 +60,8 @@
     --line: rgba(233,236,230,0.13);
     --dust: #E8923A;
     --isobar: #4FB3BE;
-    --card: #131A22;
+    --card: #151B20;
+    --dot: rgba(233,236,230,0.065);
   }
   :root[data-theme="light"] {
     --paper: #EEF1EC;
@@ -69,6 +72,7 @@
     --dust: #C2600F;
     --isobar: #1B7480;
     --card: #F6F8F4;
+    --dot: rgba(18,24,31,0.065);
   }
 
   * { box-sizing: border-box; }
@@ -76,7 +80,7 @@
   body {
     margin: 0;
     background-color: var(--paper);
-    background-image: radial-gradient(var(--line) 1px, transparent 1.4px);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1.4px);
     background-size: 26px 26px;
     color: var(--ink);
     font-family: var(--sans);
@@ -278,24 +282,25 @@
 
   /* ---------- TIMELINE (shared spine: Education + Experience) ---------- */
   .timeline { display: flex; flex-direction: column; }
-  .timeline-item { display: flex; gap: 26px; align-items: flex-start; }
-  .timeline-item + .timeline-item { margin-top: 8px; }
+  .timeline-item { display: flex; gap: 18px; align-items: flex-start; }
+  .timeline-item + .timeline-item { margin-top: 32px; }
   .timeline-node {
     position: relative;
-    flex: 0 0 60px;
-    width: 60px;
-    height: 60px;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin-top: 20px;
     border-radius: 50%;
     background: var(--card);
-    border: 2px solid var(--line);
+    border: 1.5px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-family: var(--mono);
-    font-size: 10.5px;
+    font-size: 8.5px;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     color: var(--ink-soft);
     z-index: 1;
   }
@@ -310,52 +315,57 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
+    width: 1px;
     height: 100%;
-    min-height: 32px;
-    background: var(--line);
+    min-height: 24px;
+    background: color-mix(in srgb, var(--line) 55%, transparent);
   }
   .timeline-body {
     flex: 1;
     min-width: 0;
-    padding: 10px 0 40px;
-    border-bottom: 1px solid var(--line);
+    background: var(--card);
+    border: 1px solid color-mix(in srgb, var(--ink) 7%, transparent);
+    border-radius: 12px;
+    padding: 22px 26px;
   }
-  .timeline-item:last-child .timeline-body { border-bottom: none; padding-bottom: 4px; }
   .timeline-top {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
   .timeline-body h3 {
     font-family: var(--serif);
     font-weight: 600;
-    font-size: 1.22rem;
+    font-size: 1.12rem;
     margin: 0;
     letter-spacing: -0.005em;
   }
   .timeline-date {
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 10.5px;
     letter-spacing: 0.02em;
     color: var(--ink-soft);
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 3px 10px;
   }
-  .timeline-item.current .timeline-date { color: var(--isobar); }
+  .timeline-item.current .timeline-date { color: var(--isobar); border-color: color-mix(in srgb, var(--isobar) 40%, var(--line)); }
   @media (max-width: 560px) {
-    .timeline-item { gap: 16px; }
-    .timeline-node { flex-basis: 44px; width: 44px; height: 44px; font-size: 8.5px; }
+    .timeline-item { gap: 12px; }
+    .timeline-node { flex-basis: 36px; width: 36px; height: 36px; font-size: 7.5px; margin-top: 16px; }
+    .timeline-body { padding: 18px 18px; }
   }
 
   /* ---------- EDUCATION ---------- */
-  .edu-degree { font-size: 0.98rem; color: var(--isobar); margin: 4px 0 4px; }
+  .edu-degree { font-size: 0.9rem; color: var(--ink-soft); margin: 3px 0 4px; }
   .edu-loc {
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 11px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -363,13 +373,57 @@
   }
 
   /* ---------- EXPERIENCE ---------- */
-  .timeline-body .org { font-size: 0.94rem; color: var(--isobar); margin: 4px 0 2px; }
-  .timeline-body .advisor { font-size: 0.85rem; color: var(--ink-soft); font-style: italic; margin: 0 0 4px; }
-  .timeline-body ul { margin: 14px 0 0; padding-left: 18px; }
-  .timeline-body li { margin-bottom: 10px; font-size: 0.97rem; color: var(--ink); }
-  .timeline-body li:last-child { margin-bottom: 0; }
-  .timeline-body li::marker { color: var(--dust); }
-  .timeline-body li b { font-weight: 600; }
+  .timeline-body .org {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin: 2px 0 14px;
+  }
+  .timeline-body .advisor { font-size: 0.82rem; color: var(--ink-soft); font-style: italic; margin: -8px 0 14px; }
+  .timeline-body .term { color: var(--isobar); font-weight: 500; }
+
+  .impact-bullets {
+    margin: 0;
+    padding-left: 16px;
+    max-width: 680px;
+  }
+  .impact-bullets li {
+    margin-bottom: 5px;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .impact-bullets li:last-child { margin-bottom: 0; }
+  .impact-bullets li::marker { color: var(--dust); }
+
+  .mini-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .mini-project {
+    background: color-mix(in srgb, var(--paper-alt) 55%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ink) 6%, transparent);
+    border-left: 2px solid var(--isobar);
+    border-radius: 6px;
+    padding: 10px 16px;
+    max-width: 680px;
+  }
+  .mini-project.dust-accent { border-left-color: var(--dust); }
+  .mini-project h4 {
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 3px;
+    letter-spacing: 0.01em;
+  }
+  .mini-project p {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
 
   /* ---------- PROJECTS ---------- */
   .kicker {
@@ -453,54 +507,107 @@
     .project-card { padding: 24px 22px; }
   }
 
-  /* ---------- TALKS ---------- */
-  .pub-group + .pub-group { margin-top: 40px; }
-  .pub-subhead {
+  /* ---------- TALKS: editorial conference program ---------- */
+  .section-sub {
+    font-family: var(--sans);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: -32px 0 40px;
+  }
+  .program-year {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 13px;
+    font-weight: 700;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--dust);
-    margin: 0 0 18px;
+    color: var(--ink);
+    margin: 0 0 26px;
   }
-  .pub-list { display: flex; flex-direction: column; }
-  .pub { padding: 26px 0; border-bottom: 1px solid var(--line); }
-  .pub-list .pub:last-child { border-bottom: none; padding-bottom: 4px; }
-  .pub-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
+  .program-line {
+    position: relative;
+    padding-left: 26px;
   }
-  .pub-top h3 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 1.08rem;
-    margin: 0;
-    max-width: 56ch;
+  .program-line::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 7px;
+    bottom: 7px;
+    width: 1.5px;
+    background: color-mix(in srgb, var(--dust) 45%, transparent);
   }
-  .pub-status {
+  .program-item {
+    position: relative;
+    padding-bottom: 42px;
+  }
+  .program-item:last-child { padding-bottom: 0; }
+  .program-node {
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1.5px solid var(--dust);
+  }
+  .program-meta {
     font-family: var(--mono);
     font-size: 10.5px;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--ink-soft);
+    color: var(--dust);
+    margin: 0 0 12px;
   }
-  .pub-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-  .pub.is-presented .pub-status { color: var(--isobar); }
-  .pub.is-submitted .pub-status { color: var(--dust); }
-  .pub-meta {
+  .program-meta .session {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    margin-top: 3px;
+  }
+  .program-item h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.14rem;
+    line-height: 1.4;
+    margin: 0 0 14px;
+    max-width: 620px;
+  }
+  .program-stack {
     font-family: var(--mono);
     font-size: 11.5px;
-    color: var(--ink-soft);
-    margin: 7px 0 10px;
+    color: var(--isobar);
+    letter-spacing: 0.01em;
+    margin: 0 0 16px;
+    max-width: 620px;
   }
-  .pub-desc { font-size: 0.94rem; color: var(--ink); margin: 0; max-width: 70ch; }
+  .program-presenter {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 620px;
+  }
+  .program-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    justify-content: flex-end;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 620px;
+  }
+  .program-status .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: 0 0 auto; }
+  .program-item.is-presented .program-status { color: var(--isobar); }
+  .program-item.is-submitted .program-status { color: var(--dust); }
+  @media (max-width: 560px) {
+    .program-status { justify-content: flex-start; }
+  }
 
   /* ---------- SKILLS ---------- */
   .skills-list { display: flex; flex-direction: column; }
@@ -641,13 +748,17 @@
               <h3>Research Intern</h3>
               <span class="timeline-date">06/2026 – Present</span>
             </div>
-            <p class="org">Science Systems and Applications, Inc. (SSAI) · NASA Goddard Space Flight Center</p>
-            <ul>
-              <li>Contributing to <b>TerraHydro</b>, a NASA AI-based Earth system digital twin for hydrological prediction across CONUS — soil moisture, evapotranspiration, snow water equivalent, runoff, and streamflow.</li>
-              <li>Built an end-to-end MERRA-2 data pipeline to preprocess NASA GES&nbsp;DISC reanalysis data and generate daily Prithvi&nbsp;WxC encoder embeddings.</li>
-              <li>Integrated Prithvi&nbsp;WxC atmospheric foundation-model embeddings into TerraHydro's LSTM-based hydrology framework, and is designing workflows to evaluate their impact alongside ERA5, MODIS, and static land-surface features.</li>
-              <li>Scaling the workflow toward a 12-year production run on NASA HPC, with plans to extend coverage from CONUS to global domains.</li>
+            <p class="org">SSAI · NASA Goddard Space Flight Center</p>
+            <ul class="impact-bullets">
+              <li>Contributing to <span class="term">TerraHydro</span>, NASA's AI-based Earth system digital twin for hydrological prediction across CONUS — soil moisture, evapotranspiration, snow water equivalent, runoff, and streamflow.</li>
+              <li>Scaling the workflow toward a 12-year production run on NASA <span class="term">HPC</span>, with plans to extend coverage from CONUS to global domains.</li>
             </ul>
+            <div class="mini-projects">
+              <div class="mini-project">
+                <h4>MERRA-2 → Prithvi WxC Embedding Pipeline</h4>
+                <p>Built an end-to-end pipeline to preprocess NASA GES&nbsp;DISC reanalysis data and generate daily <span class="term">Prithvi&nbsp;WxC</span> encoder embeddings; integrated into TerraHydro's <span class="term">LSTM</span>-based hydrology framework alongside <span class="term">ERA5</span>, <span class="term">MODIS</span>, and static land-surface features.</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -658,17 +769,29 @@
               <h3>Research Assistant</h3>
               <span class="timeline-date">08/2024 – Present</span>
             </div>
-            <p class="org">Center for Accelerated Real-Time Analytics (CARTA), UMBC</p>
+            <p class="org">CARTA · UMBC</p>
             <p class="advisor">Advisor: Dr. Milton Halem</p>
-            <ul>
-              <li>Develops transformer-based architectures, neural operators, and physics-informed neural networks (PINNs) for AI-driven weather and climate forecasting.</li>
-              <li><b>Prithvi-Dust</b> — an autoregressive global dust-forecasting framework adapting the NASA–IBM Prithvi&nbsp;WxC foundation model on MERRA-2 meteorological and size-resolved aerosol data, with researchers at NASA Ames, MSFC, and GMAO.</li>
-              <li>Models MERRA-2–observation residuals and applies attention- and embedding-based attribution to identify drivers of regional and vertical dust bias, informing GEOS aerosol-model improvements and future observing priorities.</li>
-              <li><b>MS Thesis</b> — designed an AI-based Observing System Simulation Experiment (OSSE) framework across four foundation models (GraphCast, FourCastNet&nbsp;v2, Aurora, Prithvi&nbsp;WxC) using ERA5, MERRA-2, and CAMS data; extended autoregressive inference to 60-day global forecasts and injected synthetic/reanalysis observations post spin-up to quantify observing-system value for temperature sounders, wind profilers/lidars, and mass-field constraints. Presented at the <b>AMS Annual Meeting</b>, January 2026.</li>
-              <li>Built a model-accountability and physical-response analysis pipeline (RMSE, NRMSE, ACC, mean bias, cross-variable coupling, synergy metrics, spatial bias-reduction maps, latitude / land-ocean / cloud-regime stratification, vertical propagation diagnostics) to evaluate how AI weather models assimilate and propagate observational constraints, including Western U.S. high-wind and fire-weather case studies.</li>
-              <li>Fine-tuning <b>Aurora</b> (1.3B parameters) on CERRA regional reanalysis at 5.5&nbsp;km resolution over Europe with mixed-precision, distributed data-parallel training for high-resolution regional forecasting.</li>
-              <li>Extending post-training workflows to air-pollution modeling — designing CAMS observation-insertion workflows for CO, PM2.5, O₃, and NO₂ with NASA Ames.</li>
+            <ul class="impact-bullets">
+              <li>Develops transformer-based architectures, neural operators, and physics-informed neural networks (<span class="term">PINNs</span>) for AI-driven weather and climate forecasting.</li>
             </ul>
+            <div class="mini-projects">
+              <div class="mini-project dust-accent">
+                <h4>Prithvi-Dust — Global Dust Forecasting</h4>
+                <p>Autoregressive dust-forecasting framework adapting <span class="term">Prithvi&nbsp;WxC</span> on <span class="term">MERRA-2</span> meteorological and size-resolved aerosol data. Models MERRA-2–observation residuals with attention- and embedding-based attribution to identify regional and vertical dust-bias drivers, informing GEOS aerosol-model improvements. With NASA Ames, MSFC, and GMAO.</p>
+              </div>
+              <div class="mini-project">
+                <h4>MS Thesis — AI-Based OSSE Framework</h4>
+                <p>Designed an Observing System Simulation Experiment framework across <span class="term">GraphCast</span>, <span class="term">FourCastNet&nbsp;v2</span>, <span class="term">Aurora</span>, and <span class="term">Prithvi&nbsp;WxC</span> using <span class="term">ERA5</span>, MERRA-2, and CAMS data; extended autoregressive inference to 60-day global forecasts. Built a model-accountability pipeline (RMSE, NRMSE, ACC, cross-variable coupling) to evaluate observational-constraint assimilation, including Western U.S. high-wind and fire-weather case studies. Presented at the AMS Annual Meeting, January 2026.</p>
+              </div>
+              <div class="mini-project">
+                <h4>Aurora Regional Fine-Tuning</h4>
+                <p>Fine-tuning <span class="term">Aurora</span> (1.3B parameters) on <span class="term">CERRA</span> regional reanalysis at 5.5&nbsp;km resolution over Europe with mixed-precision, distributed data-parallel training (<span class="term">PyTorch</span> DDP) for high-resolution regional forecasting.</p>
+              </div>
+              <div class="mini-project">
+                <h4>CAMS Air-Pollution Extension</h4>
+                <p>Extending post-training workflows to air-pollution modeling — designing <span class="term">CAMS</span> observation-insertion workflows for CO, PM2.5, O₃, and NO₂, with NASA Ames.</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -680,7 +803,7 @@
               <span class="timeline-date">01/2025 – 05/2025</span>
             </div>
             <p class="org">UMBC</p>
-            <ul>
+            <ul class="impact-bullets">
               <li>Supported students on threading, file systems, and networking projects at the systems-programming level; helped with VM setup and Linux debugging.</li>
             </ul>
           </div>
@@ -693,8 +816,8 @@
               <h3>Research Development Intern</h3>
               <span class="timeline-date">07/2023 – 06/2024</span>
             </div>
-            <p class="org">Tata Consultancy Services, Hyderabad, India</p>
-            <ul>
+            <p class="org">Tata Consultancy Services · Hyderabad, India</p>
+            <ul class="impact-bullets">
               <li>Improved semiconductor wafer yield through multi-objective optimization (pymoo) and ML (scikit-learn, TensorFlow); applied PCA and clustering for defect detection and predictive maintenance.</li>
             </ul>
           </div>
@@ -745,50 +868,41 @@
         <span class="section-num">04</span>
         <h2>Talks &amp; Presentations</h2>
       </div>
-      <div class="pub-group">
-        <p class="pub-subhead">As Presenter</p>
-        <div class="pub-list">
-          <article class="pub is-presented">
-            <div class="pub-top">
-              <h3>AI-Based OSSE Framework for Evaluating Physical Consistency in AI Weather Models</h3>
-              <span class="pub-status">Presented</span>
-            </div>
-            <p class="pub-meta">AMS Annual Meeting — January 2026</p>
-            <p class="pub-desc">MS thesis work — an Observing System Simulation Experiment framework spanning GraphCast, FourCastNet&nbsp;v2, Aurora, and Prithvi&nbsp;WxC, quantifying how AI weather models assimilate and propagate observational constraints.</p>
-          </article>
+      <p class="section-sub">Selected conference talks, abstracts &amp; presentations</p>
 
-          <article class="pub is-submitted">
-            <div class="pub-top">
-              <h3>Prithvi-Dust: Adapting a Weather and Climate Foundation Model for Global Dust Forecasting</h3>
-              <span class="pub-status">Abstract submitted</span>
-            </div>
-            <p class="pub-meta">AGU Fall Meeting 2026 — Session A009, Advances in Global Aerosol Modeling: Representation, Assimilation, and Prediction</p>
-            <p class="pub-desc">Diggikar, Halem, Raman, Collow, Roy &amp; Gee. Benchmarks Prithvi-Dust against Aurora on the 13 June 2022 Iraq sandstorm and other events, using error, bias, spatial correlation, Threat Score, and Fractions Skill Score.</p>
-          </article>
-        </div>
-      </div>
+      <p class="program-year">2026</p>
+      <div class="program-line">
+        <article class="program-item is-presented">
+          <span class="program-node"></span>
+          <p class="program-meta">Jan · AMS Annual Meeting</p>
+          <h3>AI-Based OSSE Framework for Evaluating Physical Consistency in AI Weather Models</h3>
+          <p class="program-stack">GraphCast · FourCastNet v2 · Aurora · Prithvi WxC</p>
+          <p class="program-status"><span class="dot"></span>Presented</p>
+        </article>
 
-      <div class="pub-group">
-        <p class="pub-subhead">Presented by Collaborators</p>
-        <div class="pub-list">
-          <article class="pub">
-            <div class="pub-top">
-              <h3>A Retrospective on the Sensitivity of AI Emulators to Saharan Dust</h3>
-              <span class="pub-status">Talk</span>
-            </div>
-            <p class="pub-meta">Randall Symposium — talk delivered by Dr. Milton Halem</p>
-            <p class="pub-desc">Halem, Diggikar &amp; Raman. Revisits the Randall–Carlson–Mintz (1984) finding that Saharan dust heating narrows and intensifies the tropical Atlantic rain belt, adapting Prithvi&nbsp;WxC to test whether an AI emulator reproduces that GCM sensitivity.</p>
-          </article>
+        <article class="program-item">
+          <span class="program-node"></span>
+          <p class="program-meta">Randall Symposium</p>
+          <h3>A Retrospective on the Sensitivity of AI Emulators to Saharan Dust</h3>
+          <p class="program-presenter">Presented by Dr. Milton Halem</p>
+          <p class="program-status"><span class="dot"></span>Collaborative talk</p>
+        </article>
 
-          <article class="pub">
-            <div class="pub-top">
-              <h3>Meteorology and Air Quality Prediction Using Foundation Models</h3>
-              <span class="pub-status">Poster</span>
-            </div>
-            <p class="pub-meta">NASA–ESA AI/ML Workshop — poster presented by Aishwarya Raman</p>
-            <p class="pub-desc">Raman, Gee, Diggikar, Halem, Wang, Johnson, Brosnan &amp; Roy. Explores foundation models for meteorology and atmospheric-composition emulation — fine-tuning Prithvi&nbsp;WxC for atmospheric composition, an intercomparison of Aurora, Prithvi&nbsp;WxC, and FourCastNet, and observational-constraint approaches toward neighborhood-scale forecasts.</p>
-          </article>
-        </div>
+        <article class="program-item">
+          <span class="program-node"></span>
+          <p class="program-meta">NASA–ESA AI/ML Workshop</p>
+          <h3>Meteorology and Air Quality Prediction Using Foundation Models</h3>
+          <p class="program-presenter">Poster presented by Aishwarya Raman</p>
+          <p class="program-status"><span class="dot"></span>Collaborative poster</p>
+        </article>
+
+        <article class="program-item is-submitted">
+          <span class="program-node"></span>
+          <p class="program-meta">Dec · AGU Fall Meeting<span class="session">Session A009</span></p>
+          <h3>Prithvi-Dust: Adapting a Weather and Climate Foundation Model for Global Dust Forecasting</h3>
+          <p class="program-stack">Prithvi WxC · MERRA-2 · Aerosols</p>
+          <p class="program-status"><span class="dot"></span>Abstract submitted</p>
+        </article>
       </div>
     </div>
   </section>
